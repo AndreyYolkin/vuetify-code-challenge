@@ -1,0 +1,28 @@
+/**
+ * src/styles/settings.scss
+ *
+ * Configures SASS variables and Vuetify overwrites
+ */
+
+$custom-font: 'Poppins', sans-serif;
+
+// https://vuetifyjs.com/features/sass-variables/`
+@use 'vuetify/settings' with (
+  $field-border-radius: 8px,
+  
+  $body-font-family: $custom-font,
+
+  $card-color: rgba(var(--v-theme-on-surface), var(--v-medium-emphasis-opacity)),
+  $card-elevation: 6,
+  $card-title-line-height: 1.6,
+  $card-actions-min-height: unset,
+  $card-text-padding: 1.25rem,
+  $card-item-padding: 1.25rem,
+  $card-actions-padding: 0 12px 12px,
+  $card-subtitle-opacity: 1,
+  $card-border-radius: 12px,
+
+  $dialog-border-radius: 12px,
+
+  $button-border-radius: 8px,
+);

@@ -86,7 +86,7 @@ function loadPost() {
   if (foundPost) {
     editedPost.value = { ...foundPost }
   } else {
-    router.push('/')
+    router.push('/404')
   }
 }
 

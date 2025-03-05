@@ -64,7 +64,7 @@ function loadPost() {
   if (foundPost) {
     post.value = foundPost
   } else {
-    router.push('/')
+    router.push('/404')
   }
 }
 

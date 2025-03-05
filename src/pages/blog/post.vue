@@ -99,8 +99,8 @@ async function save() {
   if (!form.value) return
   const { valid } = await form.value.validate()
   if (valid) {
-    blogStore.createPost(newPost.value)
-    router.push('/')
+    const { id } = blogStore.createPost(newPost.value)
+    router.push(`/blog/${id}`)
   }
 }
 </script>

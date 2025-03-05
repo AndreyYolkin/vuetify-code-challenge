@@ -20,10 +20,10 @@ export const useBlogStore = defineStore('blog', () => {
     posts.value.push(newPost)
   }
 
-  function updatePost(post: Post) {
+  function updatePost(id: Post['id'], post: Post) {
     const now = new Date()
     const ISODate = now.toISOString()
-    const index = posts.value.findIndex(p => p.id === post.id)
+    const index = posts.value.findIndex(p => p.id === id)
 
     if (index !== -1) {
       posts.value[index] = {
@@ -35,7 +35,7 @@ export const useBlogStore = defineStore('blog', () => {
     }
   }
 
-  function deletePost(id: string) {
+  function deletePost(id: Post['id']) {
     posts.value = posts.value.filter(post => post.id !== id)
   }
 

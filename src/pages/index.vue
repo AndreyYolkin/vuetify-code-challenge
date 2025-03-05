@@ -2,7 +2,15 @@
   <v-container>
     <v-row>
       <v-col
-        v-for="post in blogStore.posts"
+        v-if="hasPosts"
+        cols="12"
+      >
+        <post-search
+          v-model="search"
+        />
+      </v-col>
+      <v-col
+        v-for="post in filteredPosts"
         :key="post.id"
         cols="12"
         md="6"
@@ -17,6 +25,12 @@
       >
         <no-posts />
       </v-col>
+      <v-col
+        v-if="hasPosts && !hasFilteredPosts"
+        cols="12"
+      >
+        <not-found-posts />
+      </v-col>
     </v-row>
   </v-container>
 </template>
@@ -27,4 +41,18 @@ import { useBlogStore } from '@/stores/blog'
 const blogStore = useBlogStore()
 
 const hasPosts = computed(() => blogStore.posts.length > 0)
+
+const search = ref('')
+
+const filteredPosts = computed(() => {
+  if (search.value && search.value.trim().length > 0) {
+    return blogStore.posts.filter(post =>
+      post.title.toLowerCase().includes(search.value.toLowerCase())
+      || post.text.toLowerCase().includes(search.value.toLowerCase()),
+    )
+  }
+  return blogStore.posts
+})
+
+const hasFilteredPosts = computed(() => filteredPosts.value.length > 0)
 </script>

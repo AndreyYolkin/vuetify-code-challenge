@@ -36,9 +36,7 @@
         <span class="text-subtitle-1">{{ post?.createdAt ? new Date(post.createdAt).toLocaleDateString() : '' }}</span>
       </div>
       <v-divider class="my-4" />
-      <p class="text-body-1">
-        {{ post?.text }}
-      </p>
+      <pre class="text-body-1">{{ post?.text }}</pre>
     </div>
   </v-container>
 </template>

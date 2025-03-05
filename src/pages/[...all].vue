@@ -13,7 +13,7 @@
       >
         <v-card>
           <v-card-text>
-            <h1 class="text-h2 mb-6">
+            <h1 class="text-h4 text-md-h2 mb-6">
               404
             </h1>
             <p class="text-h5 mb-6">

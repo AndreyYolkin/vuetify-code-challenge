@@ -2,7 +2,7 @@
   <v-container>
     <div class="d-flex align-center ga-3">
       <router-link
-        class="text-h1 text-decoration-none text-high-emphasis"
+        class="text-h2 text-md-h1 text-decoration-none text-high-emphasis"
         to="/"
       >
         Blog Posts

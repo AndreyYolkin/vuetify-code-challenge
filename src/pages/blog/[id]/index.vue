@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <div class="d-flex flex-column gap-4">
-      <span class="text-h2 mb-3">{{ post?.title }}</span>
+      <span class="text-h4 text-md-h2 mb-3">{{ post?.title }}</span>
       <div class="d-flex align-center ga-2">
         <author-info
           :author="author"

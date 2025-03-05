@@ -10,15 +10,25 @@
             Edit Post
           </v-card-title>
           <v-card-text>
-            <v-text-field
-              v-model="editedPost.title"
-              label="Title"
-            />
+            <v-form
+              ref="form"
+              v-model="isValid"
+              @submit.prevent="save"
+            >
+              <v-text-field
+                v-model="editedPost.title"
+                label="Title"
+                :rules="blogValidationRules.title"
+                required
+              />
 
-            <v-textarea
-              v-model="editedPost.text"
-              label="Content"
-            />
+              <v-textarea
+                v-model="editedPost.text"
+                label="Content"
+                :rules="blogValidationRules.text"
+                required
+              />
+            </v-form>
           </v-card-text>
           <v-card-actions>
             <v-spacer />
@@ -32,6 +42,7 @@
             <v-btn
               color="primary"
               variant="tonal"
+              :disabled="!isValid"
               @click="save"
             >
               Save
@@ -48,10 +59,15 @@ import { ref, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useBlogStore } from '@/stores/blog'
 import type { Post } from '@/types/blog';
+import type { VForm } from 'vuetify/components';
+import { blogValidationRules } from '@/utils/validations';
 
 const route = useRoute('/blog/[id]/edit')
 const router = useRouter()
 const blogStore = useBlogStore()
+
+const form = ref<InstanceType<typeof VForm> | null>(null)
+const isValid = ref(false)
 
 const editedPost = ref<Post>({ title: '', text: '', author: '', id: '', createdAt: '', updatedAt: '' })
 const postId = computed(() => route.params.id)
@@ -65,9 +81,13 @@ function loadPost() {
   }
 }
 
-function save() {
-  blogStore.updatePost(postId.value, editedPost.value)
-  router.push(`/blog/${postId.value}`)
+async function save() {
+  if (!form.value) return
+  const { valid } = await form.value.validate()
+  if (valid) {
+    blogStore.updatePost(postId.value, editedPost.value)
+    router.push(`/blog/${postId.value}`)
+  }
 }
 
 loadPost()

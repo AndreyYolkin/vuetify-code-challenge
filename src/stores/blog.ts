@@ -18,6 +18,8 @@ export const useBlogStore = defineStore('blog', () => {
       updatedAt: ISODate
     }
     posts.value.push(newPost)
+
+    return { id }
   }
 
   function updatePost(id: Post['id'], post: Post) {

@@ -12,6 +12,11 @@ import 'vuetify/styles'
 import { createVuetify } from 'vuetify'
 
 // https://vuetifyjs.com/en/introduction/why-vuetify/#feature-guides
+const makeFieldDefaults = () => ({
+  variant: 'outlined',
+  density: 'comfortable',
+})
+
 export default createVuetify({
   theme: {
     defaultTheme: 'light',
@@ -37,14 +42,9 @@ export default createVuetify({
     }
   },
   defaults: {
-    VTextarea: {
-      variant: 'outlined',
-      density: 'comfortable',
-    },
-    VTextField: {
-      variant: 'outlined',
-      density: 'comfortable',
-    },
+    VTextarea: makeFieldDefaults(),
+    VTextField: makeFieldDefaults(),
+    VSelect: makeFieldDefaults(),
     VDialog: {
       VCard: {
         VCardActions: {

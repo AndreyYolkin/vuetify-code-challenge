@@ -29,12 +29,24 @@
                 required
               />
 
-              <v-text-field
-                v-model="newPost.author"
+              <v-select
+                v-model="newPost.authorId"
                 label="Author"
+                placeholder="Select an author"
+                :items="authors"
+                item-title="name"
+                item-value="id"
                 :rules="blogValidationRules.author"
                 required
-              />
+              >
+                <template #selection="{ item }">
+                  <author-info
+                    v-if="item.raw"
+                    :author="item.raw"
+                    :size="24"
+                  />
+                </template>
+              </v-select>
             </v-form>
           </v-card-text>
           <v-card-actions>
@@ -68,6 +80,8 @@ import { useBlogStore } from '@/stores/blog'
 import type { NewPost } from '@/types/blog';
 import type { VForm } from 'vuetify/components';
 import { blogValidationRules } from '@/utils/validations';
+import { authors } from '@/data/authors';
+import AuthorInfo from '@/components/AuthorInfo.vue';
 
 const router = useRouter()
 const blogStore = useBlogStore()
@@ -78,7 +92,7 @@ const isValid = ref(false)
 const newPost = ref<NewPost>({
   title: '',
   text: '',
-  author: ''
+  authorId: ''
 })
 
 async function save() {

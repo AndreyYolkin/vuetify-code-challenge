@@ -3,7 +3,9 @@
     <div class="d-flex flex-column gap-4">
       <span class="text-h2 mb-3">{{ post?.title }}</span>
       <div class="d-flex align-center ga-2">
-        <span class="text-subtitle-1">By {{ post?.author }}</span>
+        <author-info
+          :author="author"
+        />
         <v-spacer />
         <v-btn
           variant="text"
@@ -46,6 +48,8 @@ import { ref, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useBlogStore } from '@/stores/blog'
 import type { Post } from '@/types/blog';
+import { authors } from '@/data/authors';
+import AuthorInfo from '@/components/AuthorInfo.vue';
 
 const route = useRoute('/blog/[id]/')
 const router = useRouter()
@@ -53,6 +57,7 @@ const blogStore = useBlogStore()
 
 const post = ref<Post | null>(null)
 const postId = computed(() => route.params.id as string)
+const author = computed(() => post.value ? authors.find(a => a.id === post.value!.authorId) ?? null : null)
 
 function loadPost() {
   const foundPost = blogStore.posts.find(p => p.id === postId.value)

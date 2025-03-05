@@ -28,6 +28,11 @@
                 :rules="blogValidationRules.text"
                 required
               />
+
+              <author-info
+                v-if="selectedAuthor"
+                :author="selectedAuthor"
+              />
             </v-form>
           </v-card-text>
           <v-card-actions>
@@ -59,8 +64,10 @@ import { ref, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useBlogStore } from '@/stores/blog'
 import type { Post } from '@/types/blog';
+import { authors } from '@/data/authors';
 import type { VForm } from 'vuetify/components';
 import { blogValidationRules } from '@/utils/validations';
+import AuthorInfo from '@/components/AuthorInfo.vue';
 
 const route = useRoute('/blog/[id]/edit')
 const router = useRouter()
@@ -69,7 +76,9 @@ const blogStore = useBlogStore()
 const form = ref<InstanceType<typeof VForm> | null>(null)
 const isValid = ref(false)
 
-const editedPost = ref<Post>({ title: '', text: '', author: '', id: '', createdAt: '', updatedAt: '' })
+const editedPost = ref<Post>({ title: '', text: '', authorId: '', id: '', createdAt: '', updatedAt: '' })
+
+const selectedAuthor = computed(() => authors.find(author => author.id === editedPost.value.authorId))
 const postId = computed(() => route.params.id)
 
 function loadPost() {

@@ -29,6 +29,8 @@ export default createVuetify({
           secondary: '#fcd289',
           primary: '#603aba',
           error: '#de6051',
+          success: '#49a544',
+          info: '#0794e8',
         },
       },
       dark: {
@@ -39,6 +41,8 @@ export default createVuetify({
           background: '#23242c',
           surface: '#2D2F39',
           error: '#de6051',
+          success: '#49a544',
+          info: '#0794e8',
         },
       },
     },

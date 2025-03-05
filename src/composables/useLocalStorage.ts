@@ -1,5 +1,5 @@
-import { ref, watch, effectScope, onScopeDispose } from 'vue'
 import type { Ref, UnwrapRef } from 'vue'
+import { effectScope, onScopeDispose, ref, watch } from 'vue'
 
 /**
  * @title useLocalStorage
@@ -45,7 +45,7 @@ export function useLocalStorage<T>(key: string, defaultValue: T): Ref<T, T> | Re
       (newValue) => {
         localStorage.setItem(key, JSON.stringify(newValue))
       },
-      { deep: true }
+      { deep: true },
     )
   })
 

@@ -10,12 +10,12 @@
 </template>
 
 <script lang="ts" setup>
-import type { Author } from '@/types/author';
+import type { Author } from '@/types/author'
 
 withDefaults(defineProps<{
   author: Author | null
   size?: number
 }>(), {
-  size: 32
+  size: 32,
 })
 </script>

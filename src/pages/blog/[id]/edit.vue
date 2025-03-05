@@ -60,14 +60,14 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, computed } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
+import type { Post } from '@/types/blog'
+import type { VForm } from 'vuetify/components'
+import AuthorInfo from '@/components/AuthorInfo.vue'
+import { authors } from '@/data/authors'
 import { useBlogStore } from '@/stores/blog'
-import type { Post } from '@/types/blog';
-import { authors } from '@/data/authors';
-import type { VForm } from 'vuetify/components';
-import { blogValidationRules } from '@/utils/validations';
-import AuthorInfo from '@/components/AuthorInfo.vue';
+import { blogValidationRules } from '@/utils/validations'
+import { computed, ref } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 
 const route = useRoute('/blog/[id]/edit')
 const router = useRouter()
@@ -85,13 +85,15 @@ function loadPost() {
   const foundPost = blogStore.posts.find(p => p.id === postId.value)
   if (foundPost) {
     editedPost.value = { ...foundPost }
-  } else {
+  }
+  else {
     router.push('/404')
   }
 }
 
 async function save() {
-  if (!form.value) return
+  if (!form.value)
+    return
   const { valid } = await form.value.validate()
   if (valid) {
     blogStore.updatePost(postId.value, editedPost.value)

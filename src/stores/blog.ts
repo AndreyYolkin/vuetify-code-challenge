@@ -1,10 +1,10 @@
-import { defineStore } from 'pinia'
+import type { NewPost, Post } from '@/types/blog'
 import { useLocalStorage } from '@/composables/useLocalStorage'
-import type { Post, NewPost } from '@/types/blog'
 import { getId } from '@/utils/getId'
+import { defineStore } from 'pinia'
 
 export const useBlogStore = defineStore('blog', () => {
-  const posts = useLocalStorage<Post[]>('blog-posts', [])
+  const posts = useLocalStorage<Array<Post>>('blog-posts', [])
 
   function createPost(post: NewPost) {
     const now = new Date()
@@ -15,7 +15,7 @@ export const useBlogStore = defineStore('blog', () => {
       ...post,
       id,
       createdAt: ISODate,
-      updatedAt: ISODate
+      updatedAt: ISODate,
     }
     posts.value.push(newPost)
 
@@ -32,7 +32,7 @@ export const useBlogStore = defineStore('blog', () => {
         ...posts.value[index],
         title: post.title,
         text: post.text,
-        updatedAt: ISODate
+        updatedAt: ISODate,
       }
     }
   }
@@ -45,6 +45,6 @@ export const useBlogStore = defineStore('blog', () => {
     posts,
     createPost,
     updatePost,
-    deletePost
+    deletePost,
   }
 })

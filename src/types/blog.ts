@@ -1,6 +1,6 @@
-import type { Author } from "./author"
+import type { Author } from './author'
 
-export type Post = {
+export interface Post {
   id: string
   title: string
   text: string

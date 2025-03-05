@@ -16,8 +16,8 @@
 </template>
 
 <script lang="ts" setup>
-import { useBlogStore } from '@/stores/blog'
 import PostCard from '@/components/PostCard.vue'
+import { useBlogStore } from '@/stores/blog'
 
 const blogStore = useBlogStore()
 </script>

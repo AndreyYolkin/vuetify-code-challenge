@@ -24,7 +24,7 @@
             </p>
             <v-btn
               color="primary"
-              :to="'/'"
+              to="/"
               variant="tonal"
               block
             >

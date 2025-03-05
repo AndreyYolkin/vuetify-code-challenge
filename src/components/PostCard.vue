@@ -16,9 +16,9 @@
 </template>
 
 <script lang="ts" setup>
-import type { Post } from '@/types/blog';
-import { computed } from 'vue';
-import { authors } from '@/data/authors';
+import type { Post } from '@/types/blog'
+import { authors } from '@/data/authors'
+import { computed } from 'vue'
 
 const props = defineProps<{
   post: Post

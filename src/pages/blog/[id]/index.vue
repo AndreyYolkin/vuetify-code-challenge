@@ -44,12 +44,12 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, computed } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
+import type { Post } from '@/types/blog'
+import AuthorInfo from '@/components/AuthorInfo.vue'
+import { authors } from '@/data/authors'
 import { useBlogStore } from '@/stores/blog'
-import type { Post } from '@/types/blog';
-import { authors } from '@/data/authors';
-import AuthorInfo from '@/components/AuthorInfo.vue';
+import { computed, ref } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 
 const route = useRoute('/blog/[id]/')
 const router = useRouter()
@@ -63,7 +63,8 @@ function loadPost() {
   const foundPost = blogStore.posts.find(p => p.id === postId.value)
   if (foundPost) {
     post.value = foundPost
-  } else {
+  }
+  else {
     router.push('/404')
   }
 }

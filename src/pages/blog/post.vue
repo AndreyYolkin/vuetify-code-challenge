@@ -54,7 +54,7 @@
             <v-btn
               color="error"
               variant="text"
-              :to="'/'"
+              to="/"
             >
               Cancel
             </v-btn>
@@ -74,14 +74,14 @@
 </template>
 
 <script lang="ts" setup>
+import type { NewPost } from '@/types/blog'
+import type { VForm } from 'vuetify/components'
+import AuthorInfo from '@/components/AuthorInfo.vue'
+import { authors } from '@/data/authors'
+import { useBlogStore } from '@/stores/blog'
+import { blogValidationRules } from '@/utils/validations'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { useBlogStore } from '@/stores/blog'
-import type { NewPost } from '@/types/blog';
-import type { VForm } from 'vuetify/components';
-import { blogValidationRules } from '@/utils/validations';
-import { authors } from '@/data/authors';
-import AuthorInfo from '@/components/AuthorInfo.vue';
 
 const router = useRouter()
 const blogStore = useBlogStore()
@@ -92,11 +92,12 @@ const isValid = ref(false)
 const newPost = ref<NewPost>({
   title: '',
   text: '',
-  authorId: ''
+  authorId: '',
 })
 
 async function save() {
-  if (!form.value) return
+  if (!form.value)
+    return
   const { valid } = await form.value.validate()
   if (valid) {
     const { id } = blogStore.createPost(newPost.value)

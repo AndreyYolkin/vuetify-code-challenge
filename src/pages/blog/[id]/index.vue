@@ -46,11 +46,13 @@
 <script lang="ts" setup>
 import type { Post } from '@/types/blog'
 import AuthorInfo from '@/components/AuthorInfo.vue'
+import { useToast } from '@/composables/useToast'
 import { authors } from '@/data/authors'
 import { useBlogStore } from '@/stores/blog'
 import { computed, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
+const toast = useToast()
 const route = useRoute('/blog/[id]/')
 const router = useRouter()
 const blogStore = useBlogStore()
@@ -73,6 +75,7 @@ loadPost()
 
 function deletePost(id: string) {
   blogStore.deletePost(id)
+  toast({ message: 'Post deleted' })
   router.replace('/')
 }
 </script>

@@ -77,11 +77,14 @@
 import type { NewPost } from '@/types/blog'
 import type { VForm } from 'vuetify/components'
 import AuthorInfo from '@/components/AuthorInfo.vue'
+import { useToast } from '@/composables/useToast'
 import { authors } from '@/data/authors'
 import { useBlogStore } from '@/stores/blog'
 import { blogValidationRules } from '@/utils/validations'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
+
+const toast = useToast()
 
 const router = useRouter()
 const blogStore = useBlogStore()
@@ -101,6 +104,7 @@ async function save() {
   const { valid } = await form.value.validate()
   if (valid) {
     const { id } = blogStore.createPost(newPost.value)
+    toast({ message: 'Post created', type: 'success' })
     router.push(`/blog/${id}`)
   }
 }

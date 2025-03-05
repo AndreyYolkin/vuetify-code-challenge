@@ -63,11 +63,14 @@
 import type { Post } from '@/types/blog'
 import type { VForm } from 'vuetify/components'
 import AuthorInfo from '@/components/AuthorInfo.vue'
+import { useToast } from '@/composables/useToast'
 import { authors } from '@/data/authors'
 import { useBlogStore } from '@/stores/blog'
 import { blogValidationRules } from '@/utils/validations'
 import { computed, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+
+const toast = useToast()
 
 const route = useRoute('/blog/[id]/edit')
 const router = useRouter()
@@ -97,6 +100,7 @@ async function save() {
   const { valid } = await form.value.validate()
   if (valid) {
     blogStore.updatePost(postId.value, editedPost.value)
+    toast({ message: 'Post updated', type: 'success' })
     router.push(`/blog/${postId.value}`)
   }
 }

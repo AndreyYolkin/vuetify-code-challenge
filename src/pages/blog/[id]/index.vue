@@ -72,5 +72,6 @@ loadPost()
 
 function deletePost(id: string) {
   blogStore.deletePost(id)
+  router.replace('/')
 }
 </script>

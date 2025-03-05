@@ -11,13 +11,20 @@
           :post="post"
         />
       </v-col>
+      <v-col
+        v-if="!hasPosts"
+        cols="12"
+      >
+        <no-posts />
+      </v-col>
     </v-row>
   </v-container>
 </template>
 
 <script lang="ts" setup>
-import PostCard from '@/components/PostCard.vue'
 import { useBlogStore } from '@/stores/blog'
 
 const blogStore = useBlogStore()
+
+const hasPosts = computed(() => blogStore.posts.length > 0)
 </script>

@@ -20,6 +20,10 @@ import type { Post } from '@/types/blog'
 import { authors } from '@/data/authors'
 import { computed } from 'vue'
 
+defineOptions({
+  name: 'PostCard',
+})
+
 const props = defineProps<{
   post: Post
 }>()

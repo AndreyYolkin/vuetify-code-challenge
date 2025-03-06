@@ -10,5 +10,9 @@
 </template>
 
 <script setup lang="ts">
+defineOptions({
+  name: 'PostSearch',
+})
+
 const search = defineModel<string | null>()
 </script>

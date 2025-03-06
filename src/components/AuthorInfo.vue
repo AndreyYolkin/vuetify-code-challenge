@@ -12,6 +12,10 @@
 <script lang="ts" setup>
 import type { Author } from '@/types/author'
 
+defineOptions({
+  name: 'AuthorInfo',
+})
+
 withDefaults(defineProps<{
   author: Author | null
   size?: number

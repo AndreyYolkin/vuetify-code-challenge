@@ -19,6 +19,10 @@
 </template>
 
 <script lang="ts" setup>
+defineOptions({
+  name: 'BlogHeader',
+})
+
 const route = useRoute()
 
 const isRoot = computed(() => {

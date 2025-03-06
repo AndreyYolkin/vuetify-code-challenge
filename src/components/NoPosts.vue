@@ -13,3 +13,9 @@
     </v-btn>
   </v-alert>
 </template>
+
+<script lang="ts" setup>
+defineOptions({
+  name: 'NoPosts',
+})
+</script>

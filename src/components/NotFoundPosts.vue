@@ -7,3 +7,9 @@
     Try to reset search
   </v-alert>
 </template>
+
+<script lang="ts" setup>
+defineOptions({
+  name: 'NotFoundPosts',
+})
+</script>

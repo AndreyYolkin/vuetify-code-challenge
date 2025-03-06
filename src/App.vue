@@ -8,7 +8,7 @@
 <script lang="ts" setup>
 import type { Toast } from '@/types/toast'
 import { VSnackbarQueue } from 'vuetify/labs/VSnackbarQueue'
-import { toastKey } from './contants/toast'
+import { toastKey } from './constants/toast'
 
 interface ToastQueue {
   text: string

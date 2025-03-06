@@ -77,17 +77,17 @@
 import type { NewPost } from '@/types/blog'
 import type { VForm } from 'vuetify/components'
 import AuthorInfo from '@/components/AuthorInfo.vue'
+import { useAuthors } from '@/composables/useAuthors'
 import { useToast } from '@/composables/useToast'
-import { authors } from '@/data/authors'
 import { useBlogStore } from '@/stores/blog'
 import { blogValidationRules } from '@/utils/validations'
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
 
 const toast = useToast()
 
 const router = useRouter()
 const blogStore = useBlogStore()
+const { getAllAuthors } = useAuthors()
+const authors = getAllAuthors()
 
 const form = ref<InstanceType<typeof VForm> | null>(null)
 const isValid = ref(false)

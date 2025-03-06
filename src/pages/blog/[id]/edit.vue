@@ -30,8 +30,8 @@
               />
 
               <author-info
-                v-if="selectedAuthor"
-                :author="selectedAuthor"
+                v-if="author"
+                :author="author"
               />
             </v-form>
           </v-card-text>
@@ -63,8 +63,8 @@
 import type { Post } from '@/types/blog'
 import type { VForm } from 'vuetify/components'
 import AuthorInfo from '@/components/AuthorInfo.vue'
+import { useAuthors } from '@/composables/useAuthors'
 import { useToast } from '@/composables/useToast'
-import { authors } from '@/data/authors'
 import { useBlogStore } from '@/stores/blog'
 import { blogValidationRules } from '@/utils/validations'
 import { computed, ref } from 'vue'
@@ -81,8 +81,11 @@ const isValid = ref(false)
 
 const editedPost = ref<Post>({ title: '', text: '', authorId: '', id: '', createdAt: '', updatedAt: '' })
 
-const selectedAuthor = computed(() => authors.find(author => author.id === editedPost.value.authorId))
 const postId = computed(() => route.params.id)
+
+const { getAuthorById } = useAuthors()
+const authorId = computed(() => editedPost.value.authorId)
+const author = getAuthorById(authorId)
 
 function loadPost() {
   const foundPost = blogStore.posts.find(p => p.id === postId.value)

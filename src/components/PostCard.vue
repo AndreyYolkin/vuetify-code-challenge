@@ -17,8 +17,7 @@
 
 <script lang="ts" setup>
 import type { Post } from '@/types/blog'
-import { authors } from '@/data/authors'
-import { computed } from 'vue'
+import { useAuthors } from '@/composables/useAuthors'
 
 defineOptions({
   name: 'PostCard',
@@ -32,5 +31,6 @@ defineEmits<{
   delete: [id: Post['id']]
 }>()
 
-const author = computed(() => authors.find(a => a.id === props.post.authorId))
+const { getAuthorById } = useAuthors()
+const author = getAuthorById(props.post.authorId)
 </script>

@@ -46,11 +46,9 @@
 <script lang="ts" setup>
 import type { Post } from '@/types/blog'
 import AuthorInfo from '@/components/AuthorInfo.vue'
+import { useAuthors } from '@/composables/useAuthors'
 import { useToast } from '@/composables/useToast'
-import { authors } from '@/data/authors'
 import { useBlogStore } from '@/stores/blog'
-import { computed, ref } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
 
 const toast = useToast()
 const route = useRoute('/blog/[id]/')
@@ -59,7 +57,10 @@ const blogStore = useBlogStore()
 
 const post = ref<Post | null>(null)
 const postId = computed(() => route.params.id as string)
-const author = computed(() => post.value ? authors.find(a => a.id === post.value!.authorId) ?? null : null)
+const { getAuthorById } = useAuthors()
+
+const authorId = computed(() => post.value?.authorId ?? null)
+const author = getAuthorById(authorId)
 
 function loadPost() {
   const foundPost = blogStore.posts.find(p => p.id === postId.value)

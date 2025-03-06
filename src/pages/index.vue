@@ -9,27 +9,37 @@
           v-model="search"
         />
       </v-col>
-      <v-col
-        v-for="post in filteredPosts"
-        :key="post.id"
-        cols="12"
-        md="6"
-      >
-        <post-card
-          :post="post"
-        />
-      </v-col>
+
+      <v-fade-transition mode="out-in">
+        <v-col v-if="hasPosts && hasFilteredPosts">
+          <v-row>
+            <v-fade-transition group>
+              <v-col
+                v-for="post in filteredPosts"
+                :key="post.id"
+                cols="12"
+                md="6"
+              >
+                <post-card
+                  :post="post"
+                />
+              </v-col>
+            </v-fade-transition>
+          </v-row>
+        </v-col>
+
+        <v-col
+          v-if="hasPosts && !hasFilteredPosts"
+          cols="12"
+        >
+          <not-found-posts />
+        </v-col>
+      </v-fade-transition>
       <v-col
         v-if="!hasPosts"
         cols="12"
       >
         <no-posts />
-      </v-col>
-      <v-col
-        v-if="hasPosts && !hasFilteredPosts"
-        cols="12"
-      >
-        <not-found-posts />
       </v-col>
     </v-row>
   </v-container>

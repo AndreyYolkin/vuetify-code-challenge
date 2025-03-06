@@ -46,19 +46,17 @@ pnpm build
 
 ```
 src/
+├── assets/         # Static assets like images, fonts, etc.
 ├── components/     # Reusable Vue components
-│   ├── BlogHeader.vue
-│   └── PostCard.vue
 ├── composables/    # Composable functions
-│   └── useLocalStorage.ts
+├── constants/      # Project constants
 ├── layouts/        # Page layouts
 ├── pages/          # Application pages
+├── plugins/        # Vue plugins and configurations
 ├── stores/         # Pinia stores
-│   └── blog.ts
+├── styles/         # No custom CSS, only Vuetify settings
 ├── types/          # TypeScript type definitions
-│   └── blog.ts
 └── utils/          # Utility functions
-    └── getId.ts
 ```
 
 ## ✨ Technical Stack
